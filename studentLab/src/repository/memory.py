@@ -47,7 +47,7 @@ class inMemory:
                 e.printErrors()
                 ok = True
         if ok == True :
-            print 13*" " + "Errors while loading from memory!"
+            print 13*" " + "Errors while loading students from memory!"
             
     def presetAssignments(self):
         list=[]
@@ -65,6 +65,12 @@ class inMemory:
         list.append(asg1)
         asg1 = Assignment("2", "lab", "4", "6")
         list.append(asg1)
+        asg1 = Assignment("2", "lab", "4", "6")
+        list.append(asg1)
+        asg1 = Assignment("", "lab", "4", "6")
+        list.append(asg1)
+        asg1 = Assignment("11", "lab", "4", "6")
+        list.append(asg1)
         return list
     
     def updateAssignments(self):
@@ -75,10 +81,12 @@ class inMemory:
                 self.asg.storeA(asg,self.students)
             except repoException :
                 ok = True
-                if self.repositoryAssignment.ok :
+                if self.asg.ok :
                     print 13*" " + "WARNING!>>> " + "Cant save an assignment for a void student ID"
-                elif not self.repositoryAssignment.ok :
-                    print 5*" " + "Duplicate ID"
+                elif not self.asg.ok :
+                    print 13*" " + "WARNING!>>> " +"Duplicate ID!"
             except validatorException, e :
                 ok = True
                 e.printErrors()
+        if ok == True :
+            print 13*" " + "Errors while loading assignments from memory!"
