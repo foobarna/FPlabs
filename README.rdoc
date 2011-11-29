@@ -1,10 +1,10 @@
 	
 
 =	Name: Barna Bogdan
-	Group: 913
-	Year: 2011/2012
+===	Group: 913
+===	Year: 2011/2012
 
-HOWTO LOAD IT:
+== HOWTO LOAD IT:
 1. Click on "ZIP" button, located above, or {click on this link}[https://github.com/icanblink/FPlabs/zipball/master] for direct download.
 2. Save it somewhere on the local HDD
 3. Open Eclipse, with Pydev plug-in installed
@@ -20,4 +20,4 @@ HOWTO LOAD IT:
 3.The name for interpreter it needs to be Python27. *Case sensitive!!
 4.If you already have an interpreter for python2.7 and you dont want to change its name globaly, then right click on project "studentLab" and go to Pydev-Interpreter and choose there your interpreter. (it needs to be for python2.7!!!!)
 
-GOOD LUCK !
+	GOOD LUCK !
