@@ -63,8 +63,7 @@ class consoleUI:
             elif cmd == 4 :
                 self.printStudents()
             elif cmd == 5 :
-                break
-            break
+                self.showMain()
     
     def showManageAsg(self):
         print
@@ -137,10 +136,16 @@ class consoleUI:
         try:
             id = raw_input("Give student id: ")
             st = self.repositoryStudent.delId(id)
-            self.repositoryAssignment.delAsg(id)
+            self.removeAssignment(id)
             print 5* " " + "Student " + st.getName() + " with id " + st.getId() + " was deleted. FOREVAH!!!"
         except repoException :
             print 13*" " + "WARNING!>>> " + "Void ID!"
+            
+    def removeAssignment(self,id):
+        try:
+            self.repositoryAssignment.delAsg(id)
+        except repoException :
+            pass
             
     def updateStudent(self):
         try:

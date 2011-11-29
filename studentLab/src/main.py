@@ -10,11 +10,11 @@ valSt = validateStudent()
 valAsg = validateAssignment()
 
 repositoryAssignmnent = repoA(valAsg)
-#repositoryStudent = repoSt(valSt)
-repositoryStudent = fileRepoSt(valSt,"repository/studentsList")
+repositoryStudent = repoSt(valSt)
+#repositoryStudent = fileRepoSt(valSt,"repository/studentsList")
 
 inmemory = inMemory(repositoryStudent,repositoryAssignmnent)
-#inmemory.updateStudents()
+inmemory.updateStudents()
 inmemory.updateAssignments()
 
 ui = consoleUI(repositoryStudent,repositoryAssignmnent)

@@ -16,9 +16,8 @@ class repoSt:
         self.students[st.getId()] = st
         
     def delId(self,id):
-        if id not in self.students :
+        if id not in self.students : 
             raise repoException
-        
         st = self.students[id]
         del self.students[id]
         return st

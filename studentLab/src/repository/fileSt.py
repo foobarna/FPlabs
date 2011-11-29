@@ -6,9 +6,9 @@ class fileRepoSt(repoSt):
     def __init__(self,validator,fileName):
         repoSt.__init__(self, validator)
         self.fileName = fileName
-        self.__fromFile()
+        self.importFile()
         
-    def __fromFile(self):
+    def importFile(self):
         file = open(self.fileName)
         while True :
             line = file.readline()
@@ -25,17 +25,25 @@ class fileRepoSt(repoSt):
         
     def fileStoreSt(self,st):
         file = open(self.fileName,"a")
-        line = st.getId() + " " + st.getName() + " " + st.getGroup() + '\n'
+        line = st.getId() + " " + st.getName() + " " + st.getGroup()
+        file.write('\n')
         file.write(line)
         file.close()
         
     def fileDelId(self,id):
-#        file = open(self.fileName,'w')
-#        file.
-#        poz = file.tell()
-#        line = file.readline()
-#        for i in range(0,len(line)):
-#            file.write(i," ")
+        file = open(self.fileName,'r')
+        content = []
+        while True :
+            line = file.readline()
+            if not line : break
+            if line.isspace() : continue
+            str = line.split()
+            if id != str[0] :
+                content.append(line)
+        file.close()
+        file = open(self.fileName,'w')
+        file.writelines(content)
+        file.close()
         pass
             
         
