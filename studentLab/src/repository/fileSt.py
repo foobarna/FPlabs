@@ -16,7 +16,10 @@ class fileRepoSt(repoSt):
             if line.isspace() : continue
             data = line.split()
             st = Student(data[0],data[1],data[2])
-            self.students[st.getId()] = st
+            try:
+                repoSt.storeSt(self, st)
+            except repoException,validatorException:
+                pass
         file.close()
         
     def storeSt(self,st):

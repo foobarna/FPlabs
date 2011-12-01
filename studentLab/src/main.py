@@ -9,13 +9,27 @@ from ui.ui import consoleUI
 valSt = validateStudent()
 valAsg = validateAssignment()
 
-repositoryAssignmnent = repoA(valAsg)
-repositoryStudent = repoSt(valSt)
-#repositoryStudent = fileRepoSt(valSt,"repository/studentsList")
-
-inmemory = inMemory(repositoryStudent,repositoryAssignmnent)
-inmemory.updateStudents()
-inmemory.updateAssignments()
-
+while True :
+    try:
+        store = raw_input("Handling data from file (f) or memory (m)? ")
+        if store not in ['f','m'] :
+            raise Exception()
+        if store == 'm' :
+            repositoryAssignmnent = repoA(valAsg)
+            repositoryStudent = repoSt(valSt)
+            
+            inmemory = inMemory(repositoryStudent,repositoryAssignmnent)
+            inmemory.updateStudents()
+            inmemory.updateAssignments()
+        elif store == 'f' :
+            repositoryStudent = fileRepoSt(valSt,"repository/studentsList")
+            repositoryAssignmnent = repoA(valAsg)
+            
+            inmemory = inMemory(repositoryStudent,repositoryAssignmnent)
+            inmemory.updateAssignments()
+        break
+    except Exception():
+        print "Try again!"
+        
 ui = consoleUI(repositoryStudent,repositoryAssignmnent)
 ui.showMain()
