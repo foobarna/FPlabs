@@ -1,0 +1,32 @@
+=	Name: Barna Bogdan 
+==	Group: 913 
+===	Year: 2011/2012
+
+=	HOWTO LOAD IT:
+
+1. Click on “ZIP” button, located above, or {click on this link}[https://github.com/icanblink/FPlabs/zipball/master] for direct download.
+
+2. Save it somewhere on the local HDD
+
+3. Open Eclipse, with Pydev plug-in installed
+
+4. Go to File > Import …
+
+5. Select General > Existing project into workspace
+
+6. Check on “Select archive file” and then “Browse” for the file. (the is like this patern: icanblink-FPlabs-<numbers>.zip)
+
+7. Select a project from those available. (studentLab in this case)
+
+8. Finish!
+
+=	NOTE 
+
+1. You need python2.7 to interpret it in your Eclipse. 
+
+2. If you dont have python2.7 you need to install it and configure an interpreter. {See this link for howto}[www.pydev.org/manual_101_interpreter.html]
+
+3. The name for interpreter it needs to be Python27. *Case sensitive!! 
+
+4. If you already have an interpreter for python2.7 and you dont want to change its name globaly, then right click on project “studentLab” and go to Pydev-Interpreter and choose there your interpreter. (it needs to be for python2.7!!!!)
+
