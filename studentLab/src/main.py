@@ -1,8 +1,8 @@
-from domain.students import Student
 from repository.repoSt import repoSt
 from repository.repoA import repoA
 from repository.memory import inMemory
 from repository.fileSt import fileRepoSt
+from repository.fileA import fileRepoA
 from domain.validators import validateStudent, validateAssignment
 from ui.ui import consoleUI
 
