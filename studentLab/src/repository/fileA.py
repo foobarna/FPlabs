@@ -1,5 +1,59 @@
-'''
-Created on Nov 29, 2011
+from repository.repoSt import repoException
+from repository.repoA import repoA
+from domain.assignments import Assignment
+from domain.validators import validatorException
 
-@author: bog
-'''
+class fileRepoSt(repoA):
+    def __init__(self,validator,fileName):
+        repoA.__init__(self, validator)
+        self.fileName = fileName
+        self.importFile()
+        
+    def importFile(self):
+        file = open(self.fileName)
+        while True :
+            line = file.readline()
+            if not line : break
+            if line.isspace() : continue
+            data = line.split()
+            st = Assignment(data[0],data[1],data[2],data[3])
+            try:
+                repoA.storeA(self, st)
+            except repoException,validatorException:
+                pass
+        file.close()
+        
+    def storeSt(self,st):
+        repoSt.storeSt(self, st)
+        self.fileStoreSt(st)
+        
+    def fileStoreSt(self,st):
+        file = open(self.fileName,"a")
+        line = st.getId() + " " + st.getName() + " " + st.getGroup()
+        file.write('\n')
+        file.write(line)
+        file.close()
+        
+    def fileDelId(self,id):
+        file = open(self.fileName,'r')
+        content = []
+        while True :
+            line = file.readline()
+            if not line : break
+            if line.isspace() : continue
+            str = line.split()
+            if id != str[0] :
+                content.append(line)
+        file.close()
+        file = open(self.fileName,'w')
+        file.writelines(content)
+        file.close()
+    
+    def delId(self,id):
+        repoSt.delId(self, id)
+        self.fileDelId(id)
+        
+    def updateSt(self,st):
+        repoSt.updateSt(self,st)
+        self.fileDelId(st.getId())
+        self.fileStoreSt(st)
