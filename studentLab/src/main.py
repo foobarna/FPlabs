@@ -23,10 +23,7 @@ while True :
             inmemory.updateAssignments()
         elif store == 'f' :
             repositoryStudent = fileRepoSt(valSt,"repository/studentsList")
-            repositoryAssignmnent = repoA(valAsg)
-            
-            inmemory = inMemory(repositoryStudent,repositoryAssignmnent)
-            inmemory.updateAssignments()
+            repositoryAssignmnent = filerepoA(valAsg,"repository/assignmentsList")
         break
     except Exception():
         print "Try again!"
