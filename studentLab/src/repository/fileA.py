@@ -3,14 +3,15 @@ from repository.repoA import repoA
 from domain.assignments import Assignment
 from domain.validators import validatorException
 
-class fileRepoSt(repoA):
-    def __init__(self,validator,fileName):
+class fileRepoA(repoA):
+    def __init__(self,validator,studentRepo,fileName):
         repoA.__init__(self, validator)
         self.fileName = fileName
+        self.studentRepo = studentRepo
         self.importFile()
         
     def importFile(self):
-        file = open(self.fileName)
+        file = open(self.fileName,'r')
         while True :
             line = file.readline()
             if not line : break
@@ -18,13 +19,13 @@ class fileRepoSt(repoA):
             data = line.split()
             asg = Assignment(data[0],data[1],data[2],data[3])
             try:
-                repoA.storeA(self, asg)
+                repoA.storeA(self, asg, self.studentRepo)
             except repoException,validatorException:
                 pass
         file.close()
         
     def storeA(self,asg):
-        repoA.storeA(self, asg)
+        repoA.storeA(self, asg, self.studentRepo)
         self.fileStoreA(asg)
         
     def fileStoreA(self,asg):
@@ -34,7 +35,7 @@ class fileRepoSt(repoA):
         file.write(line)
         file.close()
         
-    def fileDelId(self,id):
+    def fileDelAsg(self,id):
         file = open(self.fileName,'r')
         content = []
         while True :
@@ -49,11 +50,11 @@ class fileRepoSt(repoA):
         file.writelines(content)
         file.close()
     
-    def delId(self,id):
+    def delAsg(self,id):
         repoA.delId(self, id)
         self.fileDelId(id)
         
-    def updateSt(self,asg):
-        repoSt.updateSt(self,st)
-        self.fileDelId(asg.getId())
+    def updateAsg(self,asg):
+        repoA.updateA(self,asg)
+        self.fileDelAsg(asg.getId())
         self.fileStoreA(asg)
