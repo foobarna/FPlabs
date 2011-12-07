@@ -47,10 +47,12 @@ class fileRepoSt(repoSt):
         file = open(self.fileName,'w')
         file.writelines(content)
         file.close()
-        pass
-            
-        
     
     def delId(self,id):
         repoSt.delId(self, id)
         self.fileDelId(id)
+        
+    def updateSt(self,st):
+        repoSt.updateSt(self,st)
+        self.fileDelId(st.getId())
+        self.fileStoreSt(st)
