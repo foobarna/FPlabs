@@ -16,20 +16,20 @@ class fileRepoSt(repoA):
             if not line : break
             if line.isspace() : continue
             data = line.split()
-            st = Assignment(data[0],data[1],data[2],data[3])
+            asg = Assignment(data[0],data[1],data[2],data[3])
             try:
-                repoA.storeA(self, st)
+                repoA.storeA(self, asg)
             except repoException,validatorException:
                 pass
         file.close()
         
-    def storeSt(self,st):
-        repoSt.storeSt(self, st)
-        self.fileStoreSt(st)
+    def storeA(self,asg):
+        repoA.storeA(self, asg)
+        self.fileStoreA(asg)
         
-    def fileStoreSt(self,st):
+    def fileStoreA(self,asg):
         file = open(self.fileName,"a")
-        line = st.getId() + " " + st.getName() + " " + st.getGroup()
+        line = asg.getId() + " " + asg.getDesc() + " " + asg.getDeadline() + " " + asg.getGrade()
         file.write('\n')
         file.write(line)
         file.close()
@@ -50,10 +50,10 @@ class fileRepoSt(repoA):
         file.close()
     
     def delId(self,id):
-        repoSt.delId(self, id)
+        repoA.delId(self, id)
         self.fileDelId(id)
         
-    def updateSt(self,st):
+    def updateSt(self,asg):
         repoSt.updateSt(self,st)
-        self.fileDelId(st.getId())
-        self.fileStoreSt(st)
+        self.fileDelId(asg.getId())
+        self.fileStoreA(asg)
