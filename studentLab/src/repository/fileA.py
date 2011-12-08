@@ -51,10 +51,10 @@ class fileRepoA(repoA):
         file.close()
     
     def delAsg(self,id):
-        repoA.delId(self, id)
-        self.fileDelId(id)
+        repoA.delAsg(self, id)
+        self.fileDelAsg(id)
         
     def updateAsg(self,asg):
-        repoA.updateA(self,asg)
+        repoA.updateAsg(self,asg)
         self.fileDelAsg(asg.getId())
         self.fileStoreA(asg)
