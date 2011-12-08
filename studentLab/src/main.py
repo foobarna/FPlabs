@@ -25,7 +25,7 @@ while True :
             repositoryStudent = fileRepoSt(valSt,"repository/studentsList")
             repositoryAssignmnent = filerepoA(valAsg,repositoryStudent,"repository/assignmentsList")
         break
-    except Exception():
+    except Exception:
         print "Try again!"
         
 ui = consoleUI(repositoryStudent,repositoryAssignmnent)
