@@ -30,4 +30,3 @@ while True :
         
 ui = consoleUI(repositoryStudent,repositoryAssignmnent)
 ui.showMain()
-
