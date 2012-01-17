@@ -1,4 +1,8 @@
 #ex 16
+#Generate all numbers of n digits with the property that 
+#no number has two identical neighboring subsequences. 
+#For example, for n=6, 121312 is correct, and 121313 and 
+#132132 are not correct.
 
 def print_it(sol, n):
     for i in range(1, n + 1):
