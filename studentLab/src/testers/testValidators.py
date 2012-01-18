@@ -64,10 +64,16 @@ class TestValidators(unittest.TestCase):
         assert len(assi.getErrors()) == 3
 
 def suite():
-    print "Starting the test"
+    print "Test for Validators runned succesfuly "
     suite = unittest.TestSuite()
     suite.addTest(TestValidators("testValidateStudent"))
-    print "ending..."
+    suite.addTest(TestValidators("testCreateStudent"))
+    suite.addTest(TestValidators("testStudentisValid"))
+    suite.addTest(TestValidators("testStudentisValid2"))
+    suite.addTest(TestValidators("testCreateAssignment"))
+    suite.addTest(TestValidators("testAssignmentisValid"))
+
+    print ""
     return suite
 
 runner = unittest.TextTestRunner()
