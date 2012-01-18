@@ -21,17 +21,19 @@ def is_valid(k, sol, a):
         if a[sol[i]][sol[i + 1]] == 1 : return False
     return True
 
-def is_solution(k, n):
-    return (k == n + 1)
-
-def bcktr(n, k, sol, a):
-    if is_solution(k, n):
-        print_it(sol, n)
-        print '\n'
-    else :
-        sol[k] = 0
-        while succesor(n, k, sol) :
-            if is_valid(k, sol, a) : bcktr(n, k + 1, sol, a)
+def bcktr(n, sol, a):
+    k = 1
+    sol[k] = 0
+    while k > 0:
+        if succesor(n, k, sol):
+            if is_valid(k, sol, a) :
+                if k == n :
+                    print_it(sol, n)
+                else :
+                    k += 1
+                    sol[k] = 0
+        else:
+            k -= 1
 
 def main():
     sol = []
@@ -42,6 +44,6 @@ def main():
         for j in range(i + 1, n + 1):
             a[i][j] = int(input(str("A[" + str(i) + "][" + str(j) + "]=")))
             if a[i][j] == 0 : a[j][i] = 1
-    bcktr(n, 1, sol, a)
+    bcktr(n, sol, a)
 
 main()
