@@ -6,6 +6,7 @@ from repository.fileA import fileRepoA
 from domain.validators import validateStudent, validateAssignment
 from testers.testValidators import TestValidators
 from testers.testStudent import TestStudent
+from testers.testAssignment import TestAssignment
 from ui.ui import consoleUI
 
 print '\n'

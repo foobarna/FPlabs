@@ -19,7 +19,7 @@ class TestStudent(unittest.TestCase):
         assert st.getErrors() != []
 
 def suite():
-    print "Test for Student runned succesfuly"
+    print "Test for Student ran successfully"
     suite = unittest.TestSuite()
     suite.addTest(TestStudent("testStudent"))
     suite.addTest(TestStudent("testIsValid"))
