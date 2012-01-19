@@ -4,11 +4,11 @@ from utils import *
 import sys
 
 class consoleUI:
-    def __init__(self,repositoryStudent,repositoryAssignment):
+    def __init__(self, repositoryStudent, repositoryAssignment):
         self.repositoryStudent = repositoryStudent
         self.repositoryAssignment = repositoryAssignment
-        self.s = 3*">" + " "
-        
+        self.s = 3 * ">" + " "
+
     def showMain(self):
         print ""
         print self.s + "1 >Manage students list"
@@ -24,8 +24,8 @@ class consoleUI:
                     if cmd < 1 or cmd > 5 :
                         raise Exception()
                     break
-                except (NameError,Exception):
-                    print 20*" " + "WARNING!>>> " + "Must be an integer number from 1 to 5"
+                except (NameError, Exception):
+                    print 20 * " " + "WARNING!>>> " + "Must be an integer number from 1 to 5"
             if cmd == 1 :
                 self.showManageSt()
             elif cmd == 2 :
@@ -36,7 +36,7 @@ class consoleUI:
                 self.showStatistics()
             elif cmd == 5 :
                 sys.exit()
-    
+
     def showManageSt(self):
         print ""
         print self.s + "1 >Add new student"
@@ -52,8 +52,8 @@ class consoleUI:
                     if cmd < 1 or cmd > 5 :
                         raise Exception()
                     break
-                except (NameError,Exception):
-                    print 13*" " + "WARNING!>>> " + "Must be an integer number from 1 to 5"
+                except (NameError, Exception):
+                    print 13 * " " + "WARNING!>>> " + "Must be an integer number from 1 to 5"
             if cmd == 1 :
                 self.addStudent()
             elif cmd == 2 :
@@ -61,10 +61,11 @@ class consoleUI:
             elif cmd == 3 :
                 self.removeStudent()
             elif cmd == 4 :
-                self.printStudents()
+                students = self.repositoryStudent.getAll()
+                self.printStudents(students)
             elif cmd == 5 :
                 self.showMain()
-    
+
     def showManageAsg(self):
         print
         print self.s + "1 >Add new assignment"
@@ -80,8 +81,8 @@ class consoleUI:
                     if cmd < 1 or cmd > 5 :
                         raise Exception()
                     break
-                except (NameError,Exception):
-                    print 13*" " + "WARNING!>>> " + "Must be an integer number from 1 to 5"
+                except (NameError, Exception):
+                    print 13 * " " + "WARNING!>>> " + "Must be an integer number from 1 to 5"
             if cmd == 1 :
                 self.addAssignment()
             elif cmd == 2 :
@@ -92,7 +93,7 @@ class consoleUI:
                 self.printAssignments()
             elif cmd == 5 :
                 self.showMain()
-    
+
     def showStatistics(self):
         print
         print self.s + "1 >Get students with grades below 5"
@@ -106,104 +107,111 @@ class consoleUI:
                     if cmd < 1 or cmd > 3 :
                         raise Exception()
                     break
-                except (NameError,Exception):
-                    print 13*" " + "WARNING!>>> " + "Must be an integer number from 1 to 3"
+                except (NameError, Exception):
+                    print 13 * " " + "WARNING!>>> " + "Must be an integer number from 1 to 3"
             if cmd == 1 :
                 self.showUnder5()
             elif cmd == 2 :
                 self.showSortName()
             elif cmd == 3 :
-                self.showMain()       
-    
+                self.showMain()
+
     def addStudent(self):
         try:
             st = getStudentUI()
             self.repositoryStudent.storeSt(st)
-            print 5*" " + "Student " + st.getName() + " was saved ..."
+            print 5 * " " + "Student " + st.getName() + " was saved ..."
         except repoException :
-            print 13*" " + "WARNING!>>> " +"Duplicate ID!"
+            print 13 * " " + "WARNING!>>> " + "Duplicate ID!"
         except validatorException, e :
             e.printErrors()
-            
-    def printStudents(self):
-        students = self.repositoryStudent.getAll()
-        print "\n Students from the list: "
-        print "%3s %-10s %3s" % ("ID", "Name", "Group")
-        for ex in students :
-            print printStLine(ex)
-            
+
+    def printStudents(self, students, i = 0):
+        """
+        the recursive function 
+        """
+        if i == len(students) :
+            return False
+        else:
+            if i == 0 :
+                print "\n Students from the list: "
+                print "%3s %-10s %3s" % ("ID", "Name", "Group")
+            print printStLine(students[i])
+            return self.printStudents(students, i + 1)
+
+
     def removeStudent(self):
         try:
             id = raw_input("Give student id: ")
             st = self.repositoryStudent.delId(id)
             self.removeAssignment(id)
-            print 5* " " + "Student " + st.getName() + " with id " + st.getId() + " was deleted. FOREVAH!!!"
+            print 5 * " " + "Student " + st.getName() + " with id " + st.getId() + " was deleted. FOREVAH!!!"
         except repoException :
-            print 13*" " + "WARNING!>>> " + "Void ID!"
-            
-    def removeAssignment(self,id):
+            print 13 * " " + "WARNING!>>> " + "Void ID!"
+
+    def removeAssignment(self, id):
         try:
             self.repositoryAssignment.delAsg(id)
         except repoException :
             pass
-            
+
     def updateStudent(self):
         try:
             st = getStudentUI()
             self.repositoryStudent.updateSt(st)
-            print 5*" " + "Updated!"
+            print 5 * " " + "Updated!"
         except repoException :
-            print 13*" " + "WARNING!>>>" +" ID dosent exist!"
+            print 13 * " " + "WARNING!>>>" + " ID dosent exist!"
         except validatorException, e:
             e.printErrors()
-            
+
     def searchStudent(self):
         id = raw_input("Give student id: ")
         st = self.repositoryStudent.findId(id)
         if st == None :
-            print 5*" " + "Student " + id + " was not found!"
+            print 5 * " " + "Student " + id + " was not found!"
         else :
-            print 5*" " + "Student found! \n  " + printStLine(st)
-     
+            print 5 * " " + "Student found! \n  " + printStLine(st)
+
     def addAssignment(self):
         try:
             asg = getAssignmentUI()
-            self.repositoryAssignment.storeA(asg,self.repositoryStudent)
+            self.repositoryAssignment.storeA(asg, self.repositoryStudent)
             st = self.repositoryStudent.findId(asg.getId())
-            print 5*" " + "Assignment " + asg.getDesc() + " was saved for student " + st.getName() + " ..."
+            print 5 * " " + "Assignment " + asg.getDesc() + " was saved for student " + st.getName() + " ..."
         except repoException :
             if self.repositoryAssignment.ok :
-                print 13*" " + "WARNING!>>> " + "Cant save an assignment for a void student ID"
+                print 13 * " " + "WARNING!>>> " + "Cant save an assignment for a void student ID"
             if not self.repositoryAssignment.ok :
-                print 5*" " + "Duplicate ID"
+                print 5 * " " + "Duplicate ID"
         except validatorException, e :
             e.printErrors()
-            
+
     def delAssignment(self):
         try:
             asg = getAssignmentUI()
             self.repositoryAssignment.delAsg(asg.getId())
-            print 5*" " + "Assignment for student " + asg.getId() + " deleted .... :-s"
+            print 5 * " " + "Assignment for student " + asg.getId() + " deleted .... :-s"
         except repoException :
-            print 13*" " + "WARNING!>>> " +"ID not found!"
+            print 13 * " " + "WARNING!>>> " + "ID not found!"
         except validatorException, e :
             e.printErrors()
-            
+
     def updateAssignmnent(self):
         try:
             asg = getAssignmentUI()
             self.repositoryAssignment.updateAsg(asg)
-            print 5*" " + "Assignment updated!"
+            print 5 * " " + "Assignment updated!"
         except repoException :
-            print 13*" " + "WARNING!>>> " +"ID not found"
+            print 13 * " " + "WARNING!>>> " + "ID not found"
         except validatorException, e :
             e.printErrors()
-            
+
     def printAssignments(self):
         assignments = self.repositoryAssignment.getAll()
         for asg in assignments :
             print printAsgLine(asg)
-            
+
     def showUnder5(self):
         assignments = self.repositoryAssignment.getAll()
         for asg in assignments :
