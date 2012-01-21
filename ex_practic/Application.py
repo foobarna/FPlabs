@@ -1,5 +1,13 @@
-'''
-Created on Jan 13, 2012
+from repository.LabRepository import LabRepository
+from repository.StudentRepository import StudentRepository
+from ui.LabController import LabController
+from ui.LabUI import LabUI
 
-@author: blink
-'''
+def run():
+    stRepo = StudentRepository('repository/student.txt')
+    labRepo = LabRepository("repository/lab.txt")
+    labCtrl = LabController(stRepo, labRepo)
+    labUI = LabUI(labCtrl)
+    labUI.run()
+
+run()

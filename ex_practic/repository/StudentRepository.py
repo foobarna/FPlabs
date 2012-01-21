@@ -30,3 +30,11 @@ class StudentRepository():
             return st
         else : return None
 
+def test():
+    a = StudentRepository('student.txt')
+    for i in a.students.values():
+        print i.name
+    b = a.findById(5)
+    print b.name
+
+#test()
