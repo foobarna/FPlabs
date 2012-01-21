@@ -39,7 +39,7 @@ class LabUI:
         problemNumber = input('Give the problem number: ')
         try:
             self.labCtrl.addLab(studentId, labNumber, problemNumber)
-        except repoException():
+        except repoException:
             print "Same laboratory exists for the same student"
 
 

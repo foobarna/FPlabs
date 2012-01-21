@@ -10,10 +10,10 @@ class LabController:
 
     def addLab(self, studentId, labNumber, problemNumber):
         lab = Lab(studentId, labNumber, problemNumber)
-        if lab in self.LabRepo.labs.values():
+        find = str(studentId) + str(labNumber)
+        if find in self.LabRepo.labs:
             raise repoException
-        else :
-            self.StRepo.add(lab)
+        self.LabRepo.add(lab)
 
     def getStudentById(self, studentId):
         return self.StRepo.findById(studentId)
