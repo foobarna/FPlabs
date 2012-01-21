@@ -5,7 +5,7 @@
 def print_it(sol, n):
     for i in range(1, n + 1):
         print sol[i],
-    return
+    print ""
 
 def succesor(n, k, sol):
     if sol[k] < n:
